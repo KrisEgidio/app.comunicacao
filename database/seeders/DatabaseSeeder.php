@@ -22,5 +22,10 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'is_active' => true,
         ]);
+
+        $this->call([
+            EstadoSeeder::class,
+            CidadeSeeder::class,
+        ]);
     }
 }
