@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->longText('descricao');
             $table->enum('status', ['aberto', 'em_progresso', 'aguardando_usuario', 'fechado'])->default('aberto');
-            $table->foreignId('usuario_id')->constrained('usuarios');
+            $table->foreignId('usuario_id')->constrained('users');
             $table->foreignId('imagem_id')->nullable()->constrained('imagens');
             $table->timestamps();
         });

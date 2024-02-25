@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->boolean('aceito')->default(false);
             $table->timestamp('data_aceite')->nullable();
-            $table->foreignId('compartilhado_por')->constrained('usuarios');
-            $table->foreignId('aceito_por')->constrained('usuarios');
+            $table->foreignId('compartilhado_por')->constrained('users');
+            $table->foreignId('aceito_por')->constrained('users');
+            $table->foreignId('evento_id')->constrained('eventos')->onDelete('cascade');
+            $table->foreignId('loja_id')->constrained('lojas')->onDelete('cascade');
             $table->timestamps();
         });
     }

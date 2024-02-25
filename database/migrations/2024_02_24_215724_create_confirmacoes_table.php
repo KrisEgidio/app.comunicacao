@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('confirmado_em')->nullable();
             $table->timestamp('enviado_em')->nullable();
             $table->timestamp('expira_em')->nullable();
-            $table->foreignId('usuario_id')->constrained('usuarios');
+            $table->foreignId('usuario_id')->constrained('users');
             $table->timestamps();
         });
     }

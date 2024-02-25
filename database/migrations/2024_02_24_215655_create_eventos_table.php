@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('cep');
             $table->foreignId('cidade_id')->constrained('cidades');
             $table->foreignId('loja_id')->constrained('lojas');
-            $table->foreignId('usuario_id')->constrained('users');
+            $table->foreignId('criado_por')->constrained('users');
             $table->foreignId('imagem_id')->nullable()->constrained('imagens')->onDelete('cascade');
             $table->timestamps();
         });
