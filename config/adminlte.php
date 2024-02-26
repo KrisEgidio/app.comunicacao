@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => env('APP_NAME', ''),
+    'title' => env('APP_NAME', 'Laravel'),
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -129,7 +129,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => true,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
@@ -195,7 +195,7 @@ return [
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_topnav_nav' => 'navbar-expand-lg',
     'classes_topnav_container' => 'container',
 
     /*
@@ -294,11 +294,11 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:

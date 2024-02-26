@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\{
+    UsuarioController,
+    CargoController,
+    LojaController,
+    TemploController,
+};
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +27,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Rotas para usuário administrador
+/*Route::middleware('')->group(function () {
+    Route::resources([
+        'usuarios' => UsuarioController::class,
+        'cargos' => CargoController::class,
+        'lojas' => LojaController::class,
+        'templos' => TemploController::class,
+    ]);
+});*/
+
+Route::resources([
+    'usuarios' => UsuarioController::class,
+    'cargos' => CargoController::class,
+    'lojas' => LojaController::class,
+    'templos' => TemploController::class,
+]);
