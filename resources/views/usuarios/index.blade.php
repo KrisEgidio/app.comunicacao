@@ -35,6 +35,12 @@
         });
     @endphp
 
+    @if (session('sucesso'))
+        <x-index.alerta :tipo="'sucesso'" :mensagem="session('sucesso')"></x-index.alerta>
+    @elseif(session('erro'))
+        <x-index.alerta :tipo="'erro'" :mensagem="session('erro')"></x-index.alerta>
+    @endif
+
     <x-index.botoes :rota="'usuarios'" :create="true"></x-index.botoes>
 
     <div class="row">
@@ -56,7 +62,5 @@
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
+    <script src="{{asset('js/index.js')}}"></script>
 @stop

@@ -18,7 +18,19 @@
                     <td>{{ $dado['email'] }}</td>
                     <td>
                         @foreach ($dado['acoes'] as $acao)
-                            <a href="{{ $acao['url'] }}" class="btn btn-{{ $acao['cor'] }}">{{ $acao['label'] }}</a>
+                            <div class="d-inline-block">
+                                @if ($acao['label'] == 'Excluir')
+                                    <button type="button" class="btn btn-{{ $acao['cor'] }} btn-sm delete-btn"
+                                        data-toggle="modal" data-target="#confirmDeleteModal"
+                                        data-url="{{ $acao['url'] }}">
+                                        <i class="{{ $acao['icone'] }}"></i>
+                                    </button>
+                                @else
+                                    <a href="{{ $acao['url'] }}" class="btn btn-{{ $acao['cor'] }} btn-sm">
+                                        <i class="{{ $acao['icone'] }}"></i>
+                                    </a>
+                                @endif
+                            </div>
                         @endforeach
                     </td>
                 @empty
@@ -29,3 +41,5 @@
         </tbody>
     </table>
 </div>
+
+<x-modal.confirmar-exclusao></x-modal.confirmar-exclusao>

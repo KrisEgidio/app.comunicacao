@@ -11,11 +11,13 @@ class Botoes extends Component
 
     public $rota;
     public $create;
+    public $index;
 
-    public function __construct($rota, $create = false)
+    public function __construct($rota, $create = false, $index = false)
     {
         $this->rota = $rota;
         $this->create = $create;
+        $this->index = $index;
     }
 
     /**
