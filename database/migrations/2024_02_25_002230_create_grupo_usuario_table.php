@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('templos', function (Blueprint $table) {
+        Schema::create('grupo_usuario', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('endereco');
-            $table->string('bairro');
-            $table->string('cep');
-            $table->foreignId('cidade_id')->constrained('cidades');
+            $table->foreignId('grupo_id')->constrained('grupos')->onDelete('cascade');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
+            $table->boolean('moderador')->default(false);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('templos');
+        Schema::dropIfExists('loja_usuario');
     }
 };

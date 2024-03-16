@@ -43,16 +43,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="degree">Grau:</label>
-                            <input type="number" name="degree" id="degree"
-                                class="form-control @error('degree') is-invalid @enderror" value="{{ @old('degree') }}"
-                                required>
-                            @error('degree')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
                             <label for="is_active">Status:</label>
                             <select name="is_active" id="is_active"
                                 class="form-control @error('is_active') is-invalid @enderror">

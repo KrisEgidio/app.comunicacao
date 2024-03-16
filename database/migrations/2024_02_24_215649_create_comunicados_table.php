@@ -15,16 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->longText('descricao');
-            $table->time('hora');
-            $table->date('data');
-            $table->integer('grau');
-            $table->string('endereco');
-            $table->string('bairro');
-            $table->string('cep');
-            $table->foreignId('cidade_id')->constrained('cidades');
-            $table->foreignId('loja_id')->constrained('lojas');
+            $table->time('hora')->nullable();
+            $table->date('data')->nullable();
+            $table->foreignId('grupo_id')->constrained('grupos')->onDelete('cascade');
             $table->foreignId('criado_por')->constrained('users');
-            $table->foreignId('imagem_id')->nullable()->constrained('imagens')->onDelete('cascade');
             $table->timestamps();
         });
     }

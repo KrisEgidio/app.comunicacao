@@ -17,35 +17,24 @@ class Comunicado extends Model
         'data',
         'hora',
         'grau',
-        'endereco',
-        'bairro',
-        'cep',
-        'cidade_id',
-        'loja_id',
+        'grupo_id',
         'criado_por',
-        'imagem_id',
     ];
 
     protected $casts = [
         'data' => 'date',
         'hora' => 'time',
-        'cidade_id' => 'integer',
-        'loja_id' => 'integer',
+        'grupo_id' => 'integer',
         'criado_por' => 'integer',
-        'imagem_id' => 'integer',
     ];
 
-    public function cidade() : BelongsTo
+
+    public function grupo() : BelongsTo
     {
-        return $this->belongsTo(Cidade::class);
+        return $this->belongsTo(Grupo::class);
     }
 
-    public function loja() : BelongsTo
-    {
-        return $this->belongsTo(Loja::class);
-    }
-
-    public function usuario() : BelongsTo
+    public function criadoPor() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }

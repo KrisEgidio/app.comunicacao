@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loja_templo', function (Blueprint $table) {
+        Schema::create('grupos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('loja_id')->constrained('lojas')->onDelete('cascade');
-            $table->foreignId('templo_id')->constrained('templos')->onDelete('cascade');
+            $table->string('nome');
+            $table->string('descricao')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loja_templo');
+        Schema::dropIfExists('grupos');
     }
 };

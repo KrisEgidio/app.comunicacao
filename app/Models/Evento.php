@@ -17,23 +17,20 @@ class Evento extends Model
         'descricao',
         'hora',
         'data',
-        'grau',
         'endereco',
         'bairro',
         'cep',
         'cidade_id',
-        'loja_id',
+        'grupo_id',
         'criado_por',
-        'imagem_id',
     ];
 
     protected $casts = [
         'data' => 'date',
         'hora' => 'time',
         'cidade_id' => 'integer',
-        'loja_id' => 'integer',
+        'grupo_id' => 'integer',
         'criado_por' => 'integer',
-        'imagem_id' => 'integer',
     ];
 
     public function cidade() : BelongsTo
@@ -41,12 +38,12 @@ class Evento extends Model
         return $this->belongsTo(Cidade::class);
     }
 
-    public function loja() : BelongsTo
+    public function grupo() : BelongsTo
     {
-        return $this->belongsTo(Loja::class);
+        return $this->belongsTo(Grupo::class);
     }
 
-    public function usuario() : BelongsTo
+    public function criadoPor() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -54,11 +51,6 @@ class Evento extends Model
     public function imagem() : MorphMany
     {
         return $this->morphMany(Imagem::class, 'model');
-    }
-
-    public function compartilhamentos() : HasMany
-    {
-        return $this->hasMany(Compartilhamento::class);
     }
 
     public function confirmacoes() : MorphMany

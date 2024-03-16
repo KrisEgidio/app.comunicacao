@@ -22,7 +22,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'degree',
         'is_admin',
         'is_active',
         'password',
@@ -64,29 +63,11 @@ class User extends Authenticatable
         return $this->hasMany(Confirmacao::class);
     }
 
-    public function compartilhamentos() : HasMany
+    public function grupos() : BelongsToMany
     {
-        return $this->hasMany(Compartilhamento::class, 'compartilhado_por');
-    }
-
-    public function aceitacoes() : HasMany
-    {
-        return $this->hasMany(Compartilhamento::class, 'aceito_por');
-    }
-
-    public function chamados() : HasMany
-    {
-        return $this->hasMany(Chamado::class);
-    }
-
-    public function mensagens() : HasMany
-    {
-        return $this->hasMany(Mensagem::class);
-    }
-
-    public function lojas() : BelongsToMany
-    {
-        return $this->belongsToMany(Loja::class, 'loja_usuario');
+        return $this->belongsToMany(Grupo::class, 'grupo_usuario', 'usuario_id', 'grupo_id')
+            ->withPivot('moderador')
+            ->withTimestamps();
     }
 
 }

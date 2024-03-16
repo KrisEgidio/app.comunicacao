@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('confirmacoes', function (Blueprint $table) {
             $table->id();
-            $table->string('model_type');
-            $table->unsignedBigInteger('model_id');
             $table->string('token');
             $table->timestamp('confirmado_em')->nullable();
-            $table->timestamp('enviado_em')->nullable();
-            $table->timestamp('expira_em')->nullable();
             $table->foreignId('usuario_id')->constrained('users');
+            $table->foreignId('evento_id')->constrained('eventos');
             $table->timestamps();
         });
     }

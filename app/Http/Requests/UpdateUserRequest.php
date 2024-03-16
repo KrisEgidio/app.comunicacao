@@ -24,7 +24,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'required|string|min:4|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('usuario')->id,
-            'degree' => 'required|integer|min:1|max:33',
             'is_active' => 'required|boolean',
         ];
     }
@@ -38,10 +37,6 @@ class UpdateUserRequest extends FormRequest
             'email.email' => 'Email inválido',
             'email.max' => 'Email é muito longo',
             'email.unique' => 'Email já cadastrado',
-            'degree.required' => 'Grau é obrigatório',
-            'degree.integer' => 'Grau deve ser um número',
-            'degree.min' => 'Grau deve ser maior que :min',
-            'degree.max' => 'Grau deve ser menor que :max',
             'is_active.required' => 'O status é obrigatório',
             'is_active.boolean' => 'Status inválido',
         ];

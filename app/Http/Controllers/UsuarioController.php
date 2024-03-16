@@ -42,9 +42,7 @@ class UsuarioController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'degree' => $request->degree,
                 'is_active' => $request->is_active,
-                'is_admin' => false,
                 'password' => bcrypt($senhaAleatoria),
             ]);
         } catch (\Exception $e) {
@@ -86,7 +84,6 @@ class UsuarioController extends Controller
             $usuario->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'degree' => $request->degree,
                 'is_active' => $request->is_active,
             ]);
         } catch (\Exception $e) {

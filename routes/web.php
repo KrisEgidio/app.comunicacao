@@ -4,9 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
     UsuarioController,
-    CargoController,
-    LojaController,
-    TemploController,
+    GrupoController,
 };
 
 /*
@@ -40,7 +38,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resources([
     'usuarios' => UsuarioController::class,
-    'cargos' => CargoController::class,
-    'lojas' => LojaController::class,
-    'templos' => TemploController::class,
+    'grupos' => GrupoController::class,
 ]);

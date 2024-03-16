@@ -8,32 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Queue\ManuallyFailedException;
 
-class Loja extends Model
+class Grupo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nome',
-        'endereco',
-        'bairro',
-        'telefone',
-        'cep',
-        'cidade_id',
+        'descricao',
     ];
 
-    protected $casts = [
-        'cidade_id' => 'integer',
-    ];
-
-    public function cidade() : BelongsTo
-    {
-        return $this->belongsTo(Cidade::class);
-    }
-
-    public function templos() : BelongsToMany
-    {
-        return $this->belongsToMany(Templo::class, 'loja_templo');
-    }
 
     public function comunicados() : BelongsTo
     {
@@ -45,14 +28,14 @@ class Loja extends Model
         return $this->belongsTo(Evento::class);
     }
 
-    public function compartilhamentos() : BelongsTo
-    {
-        return $this->belongsTo(Compartilhamento::class);
-    }
 
     public function usuarios() : BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'loja_usuario');
+        return $this->belongsToMany(User::class, 'grupo_usuario', 'grupo_id', 'usuario_id')
+            ->withPivot(['usuario_id', 'grupo_id', 'moderador'])
+            ->withTimestamps();
     }
+
+
 
 }

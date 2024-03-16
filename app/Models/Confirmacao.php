@@ -13,30 +13,25 @@ class Confirmacao extends Model
     protected $table = 'confirmacoes';
 
     protected $fillable = [
-        'model_type',
-        'model_id',
         'token',
         'confirmado_em',
-        'enviado_em',
-        'expira_em',
         'usuario_id',
+        'evento_id',
     ];
 
     protected $casts = [
-        'model_id' => 'integer',
         'usuario_id' => 'integer',
         'confirmado_em' => 'datetime',
-        'enviado_em' => 'datetime',
-        'expira_em' => 'datetime',
+        'evento_id' => 'integer',
     ];
-
-    public function model()
-    {
-        return $this->morphTo();
-    }
 
     public function usuario() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function evento() : BelongsTo
+    {
+        return $this->belongsTo(Evento::class);
     }
 }
