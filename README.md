@@ -1,16 +1,16 @@
-# Sistema de Comunicação para Rotary Club
+# Sistema de Comunicação
 Projeto de conclusão de curso de Análise e Desenvolvimento de Sistemas da faculdade IMPACTA.
 
 ---
 
 ## Visão Geral:
 
-Este sistema foi desenvolvido para criar um canal de comunicação facilitado e eficaz exclusivamente para membros de Rotary Clubs. Seu objetivo principal é proporcionar uma plataforma intuitiva e amigável para membros com idade superior a 50 anos, permitindo uma visualização simplificada de eventos exclusivos e comunicações importantes dentro de seus respectivos grupos.
+Este sistema foi desenvolvido para criar um canal de comunicação facilitado e eficaz exclusivamente para membros de clubes. Seu objetivo principal é proporcionar uma plataforma intuitiva e amigável para membros com idade superior a 50 anos, permitindo uma visualização simplificada de eventos exclusivos e comunicações importantes dentro de seus respectivos grupos.
 
 ## Requisitos Funcionais:
 
-1. **Gestão de Grupos de Rotary:**
-    - O sistema deve permitir a criação e gestão de grupos de Rotary, facilitando a organização e comunicação entre os membros.
+1. **Gestão de Grupos:**
+    - O sistema deve permitir a criação e gestão de grupos, facilitando a organização e comunicação entre os membros.
     - O sistema deve permitir que os administradores criem, editem e excluam grupos, além de designar moderadores, se necessário.
 2. **Gestão de Usuários:**
     - O sistema deve possibilitar a criação de perfis de usuários e sua associação aos grupos correspondentes.
