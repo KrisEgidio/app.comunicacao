@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Grupo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -27,7 +28,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return view('usuarios.create', [
+            'grupos' => Grupo::orderBy('nome')->get(),
+        ]);
     }
 
     /**
@@ -39,12 +42,19 @@ class UsuarioController extends Controller
 
             $senhaAleatoria = Str::random(10);
 
-            User::create([
+            $usuario = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'is_active' => $request->is_active,
                 'password' => bcrypt($senhaAleatoria),
             ]);
+
+            if($request->grupos) {
+                foreach($request->grupos as $key => $grupo) {
+                    $usuario->grupos()->attach($grupo, ['moderador' => $request->moderadores[$key]]);
+                }
+            }
+
         } catch (\Exception $e) {
 
             return redirect()->back()
@@ -69,8 +79,20 @@ class UsuarioController extends Controller
      */
     public function edit(User $usuario)
     {
+        $grupos = $usuario->grupos()->withPivot('moderador')->orderBy('nome')->get();
+
+        $gruposArray = $grupos->map(function ($grupo) {
+            return [
+                'grupo_id' => $grupo->id,
+                'nome' => $grupo->nome,
+                'moderador' => $grupo->pivot->moderador
+            ];
+        })->toArray();
+
         return view('usuarios.edit', [
             'usuario' => $usuario,
+            'grupos' => Grupo::orderBy('nome')->get(),
+            'gruposSelecionados' => $gruposArray,
         ]);
     }
 
@@ -86,6 +108,16 @@ class UsuarioController extends Controller
                 'email' => $request->email,
                 'is_active' => $request->is_active,
             ]);
+
+
+            $usuario->grupos()->detach();
+
+            if($request->grupos){
+                foreach($request->grupos as $key => $grupo) {
+                    $usuario->grupos()->attach($grupo, ['moderador' => $request->moderadores[$key]]);
+                }
+            }
+
         } catch (\Exception $e) {
 
             return redirect()->back()
