@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Grupo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
@@ -44,23 +46,26 @@ class UsuarioController extends Controller
 
             $usuario = User::create([
                 'name' => $request->name,
+                'uuid' => 1,
                 'email' => $request->email,
                 'is_active' => $request->is_active,
+                'is_admin' => 0,
                 'password' => bcrypt($senhaAleatoria),
             ]);
 
-            if($request->grupos) {
-                foreach($request->grupos as $key => $grupo) {
+            if ($request->grupos) {
+                foreach ($request->grupos as $key => $grupo) {
                     $usuario->grupos()->attach($grupo, ['moderador' => $request->moderadores[$key]]);
                 }
             }
-
         } catch (\Exception $e) {
 
             return redirect()->back()
                 ->with('erro', 'Erro ao criar usuário!')
                 ->withInput();
         }
+
+        Mail::to($usuario->email)->send(new \App\Mail\NovoUsuario($usuario));
 
         return redirect()->route('usuarios.index')
             ->with('sucesso', 'Usuário criado com sucesso!');
@@ -112,12 +117,11 @@ class UsuarioController extends Controller
 
             $usuario->grupos()->detach();
 
-            if($request->grupos){
-                foreach($request->grupos as $key => $grupo) {
+            if ($request->grupos) {
+                foreach ($request->grupos as $key => $grupo) {
                     $usuario->grupos()->attach($grupo, ['moderador' => $request->moderadores[$key]]);
                 }
             }
-
         } catch (\Exception $e) {
 
             return redirect()->back()
@@ -145,5 +149,31 @@ class UsuarioController extends Controller
 
         return redirect()->route('usuarios.index')
             ->with('sucesso', 'Usuário excluído com sucesso!');
+    }
+
+    public function verificar($uuid)
+    {
+        $user = User::where('uuid', $uuid)->first();
+        return view('auth.verify', [
+            'user' => $user,
+        ]);
+    }
+
+    public function verificado(Request $request)
+    {
+        $user = User::where('uuid', $request->uuid)->first();
+        if ($request->password == $request->password_confirmation) {
+            $user->password = bcrypt($request->password);
+            $user->email_verified_at = now();
+            $user->uuid = 1;
+            $user->save();
+            // Autencia o usuário
+
+            Auth::login($user);
+
+            return redirect()->route('inicio');
+        }
+
+        return redirect()->back()->with('erro', 'Erro ao salvar a senha! Tente novamente mais tarde!');
     }
 }

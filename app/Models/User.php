@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'uuid',
         'email',
         'is_admin',
         'is_active',
@@ -46,6 +48,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $uuids = ['uuid'];
+
+    public function setUuidAttribute()
+    {
+        $this->attributes['uuid'] = (string) Str::uuid();
+    }
 
 
     public function comunicados() : HasMany

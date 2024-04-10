@@ -9,7 +9,7 @@
 @section('content')
     @php
 
-        $colunas = ['#', 'Nome', 'E-mail'];
+        $colunas = ['#', 'Nome', 'E-mail', 'Grupos'];
 
         // Construção dos dados para a exibição
         $dados = $usuarios->map(function ($usuario) {
@@ -17,6 +17,7 @@
                 'id' => $usuario->id,
                 'nome' => $usuario->name,
                 'email' => $usuario->email,
+                'grupos' => $usuario->grupos->count(),
                 'acoes' => [
                     'editar' => [
                         'url' => route('usuarios.edit', $usuario->id),
