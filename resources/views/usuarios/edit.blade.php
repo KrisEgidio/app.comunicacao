@@ -108,9 +108,9 @@
                                                     value="{{ $grupo['grupo_id'] }}">
                                             </td>
                                             <td>
-                                                {{ $usuario['moderador'] == 1 ? 'Sim' : 'Não' }}
+                                                {{ $grupo['moderador'] == 1 ? 'Sim' : 'Não' }}
                                                 <input type="hidden" name="moderadores[]"
-                                                    value="{{ $usuario['moderador'] }}">
+                                                    value="{{ $grupo['moderador'] }}">
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-danger btn-sm remove-grupo">

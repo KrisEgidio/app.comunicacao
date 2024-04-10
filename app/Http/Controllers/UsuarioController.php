@@ -106,6 +106,7 @@ class UsuarioController extends Controller
      */
     public function update(UpdateUserRequest $request, User $usuario)
     {
+
         try {
 
             $usuario->update([
@@ -125,7 +126,7 @@ class UsuarioController extends Controller
         } catch (\Exception $e) {
 
             return redirect()->back()
-                ->with('erro', 'Erro ao atualizar usuário!')
+                ->with('erro', 'Erro ao atualizar usuário!' . $e->getMessage())
                 ->withInput();
         }
 
