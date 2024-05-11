@@ -15,6 +15,8 @@ class GrupoController extends Controller
      */
     public function index()
     {
+        $this->authorize('gerenciar-grupos');
+
         $grupos = Grupo::paginate(10);
 
         return view('grupos.index', [
@@ -27,6 +29,8 @@ class GrupoController extends Controller
      */
     public function create()
     {
+        $this->authorize('gerenciar-grupos');
+
         return view('grupos.create', [
             'usuarios' => User::orderBy('name')->get(),
         ]);
@@ -74,6 +78,8 @@ class GrupoController extends Controller
      */
     public function edit(Grupo $grupo)
     {
+        $this->authorize('gerenciar-grupos');
+
         $usuarios = $grupo->usuarios()->withPivot('moderador')->orderBy('name')->get();
 
         // Criar um array com as informações desejadas
@@ -130,7 +136,7 @@ class GrupoController extends Controller
     public function destroy(Grupo $grupo)
     {
         try {
-
+            $this->authorize('gerenciar-grupos');
             $grupo->delete();
         } catch (\Exception $e) {
 

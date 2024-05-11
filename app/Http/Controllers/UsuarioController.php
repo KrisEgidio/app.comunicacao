@@ -18,6 +18,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        $this->authorize('gerenciar-usuarios');
+
         $usuarios = User::paginate(10);
 
         return view('usuarios.index', [
@@ -30,6 +32,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+        $this->authorize('gerenciar-usuarios');
+
         return view('usuarios.create', [
             'grupos' => Grupo::orderBy('nome')->get(),
         ]);
@@ -84,6 +88,8 @@ class UsuarioController extends Controller
      */
     public function edit(User $usuario)
     {
+        $this->authorize('gerenciar-usuarios');
+
         $grupos = $usuario->grupos()->withPivot('moderador')->orderBy('nome')->get();
 
         $gruposArray = $grupos->map(function ($grupo) {
@@ -140,6 +146,8 @@ class UsuarioController extends Controller
     public function destroy(User $usuario)
     {
         try {
+
+            $this->authorize('gerenciar-usuarios');
 
             $usuario->delete();
         } catch (\Exception $e) {

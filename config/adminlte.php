@@ -129,7 +129,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => false,
+    'usermenu_enabled' => true,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -316,12 +316,26 @@ return [
             'text' => 'Usuários',
             'url'  => 'usuarios',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'gerenciar-usuarios',
         ],
         [
             'text' => 'Grupos',
             'url'  => 'grupos',
             'icon' => 'fas fa-layer-group',
+            'can'  => 'gerenciar-grupos',
         ],
+        [
+            'text'  => 'Eventos',
+            'url'   => 'eventos',
+            'icon'  => 'fas fa-calendar',
+            'can'   => 'gerenciar-eventos',
+        ],
+        [
+            'text'  => 'Comunicados',
+            'url'   => 'comunicados',
+            'icon'  => 'fas fa-exclamation',
+            'can'   => 'gerenciar-comunicados',
+        ]
     ],
 
     /*
@@ -380,7 +394,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

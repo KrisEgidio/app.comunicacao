@@ -9,11 +9,13 @@ class Imagem extends Model
 {
     use HasFactory;
 
+    protected $table = 'imagens';
+
     protected $fillable = [
+        'nome',
         'model_type',
         'model_id',
-        'path',
-        'url',
+        'caminho',
     ];
 
     protected $casts = [

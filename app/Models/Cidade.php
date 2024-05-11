@@ -18,16 +18,6 @@ class Cidade extends Model
         return $this->belongsTo(Estado::class);
     }
 
-    public function lojas() : HasMany
-    {
-        return $this->hasMany(Loja::class);
-    }
-
-    public function templos() : HasMany
-    {
-        return $this->hasMany(Templo::class);
-    }
-
     public function comunicados() : HasMany
     {
         return $this->hasMany(Comunicado::class);

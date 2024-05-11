@@ -16,14 +16,12 @@ class Comunicado extends Model
         'descricao',
         'data',
         'hora',
-        'grau',
         'grupo_id',
         'criado_por',
     ];
 
     protected $casts = [
         'data' => 'date',
-        'hora' => 'time',
         'grupo_id' => 'integer',
         'criado_por' => 'integer',
     ];

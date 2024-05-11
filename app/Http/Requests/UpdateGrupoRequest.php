@@ -11,7 +11,7 @@ class UpdateGrupoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->can('gerenciar-grupos');
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateGrupoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required', 'string', 'max:255', 'unique:grupos', 'min:5'],
+            'nome' => ['required', 'string', 'max:255', 'min:5'],
             'descricao' => ['required', 'string', 'max:255'],
         ];
     }

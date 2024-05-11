@@ -79,4 +79,19 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function ehModerador() : bool
+    {
+        return $this->grupos()->wherePivot('moderador', true)->exists();
+    }
+
+    public function ehAdmin() : bool
+    {
+        return $this->is_admin;
+    }
+
+    public function gruposModerador()
+    {
+        return $this->grupos()->wherePivot('moderador', true)->orderBy('nome');
+    }
+
 }

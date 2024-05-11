@@ -27,7 +27,6 @@ class Evento extends Model
 
     protected $casts = [
         'data' => 'date',
-        'hora' => 'time',
         'cidade_id' => 'integer',
         'grupo_id' => 'integer',
         'criado_por' => 'integer',

@@ -11,7 +11,7 @@ class StoreGrupoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->can('gerenciar-grupos');
     }
 
     /**

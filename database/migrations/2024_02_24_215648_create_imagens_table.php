@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('caminho');
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
-            $table->string('path');
-            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
