@@ -31,7 +31,7 @@ Auth::routes();
 Route::get('/usuarios/verificar/{uuid}', [UsuarioController::class, 'verificar'])->name('usuarios.verificar');
 Route::post('/usuarios/verificado/{uuid}', [UsuarioController::class, 'verificado'])->name('usuarios.verificado');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
 
 Route::resources([
     'usuarios' => UsuarioController::class,

@@ -308,7 +308,7 @@ return [
         ],
         [
             'text'        => 'Dashboard',
-            'url'         => 'admin/pages',
+            'url'         => 'inicio',
             'icon'        => 'far fa-fw fa-file',
         ],
         ['header' => 'Administração'],
