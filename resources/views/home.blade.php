@@ -18,55 +18,88 @@
     @endif
 
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4">
-            <div class="info-box">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Eventos confirmados</span>
-                    <span class="info-box-number">
-                        5
-                        <small> nos próximos 10 dias!</small>
-                    </span>
+        <div class="col-md-4">
+
+            <div class="card card-widget widget-user">
+
+                <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username"> {{ auth()->user()->name }} </h3>
+                    <h5 class="widget-user-desc">Eventos</h5>
                 </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-clock"></i></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Próximos eventos</span>
-                    <span class="info-box-number">10
-                        <small> nos próximos dias!</small>
-                    </span>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-2" src="https://img.freepik.com/vetores-gratis/ilustracao-de-homem-negocios_53876-5856.jpg" alt="User Avatar">
                 </div>
+                <div class="card-footer">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Aguardando confirmação
+                                <span class="float-right text-warning">
+                                    12
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Confirmados
+                                <span class="float-right text-success">
+                                    4
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Recusados
+                                <span class="float-right text-danger">
+                                    5
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
 
-            </div>
-
-        </div>
-
-
-        <div class="clearfix hidden-md-up"></div>
-        <div class="col-12 col-sm-6 col-md-4">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-exclamation"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Novos comunicados</span>
-                    <span class="info-box-number">10
-                        <small> não lidos!</small>
-                    </span>
                 </div>
-
             </div>
+            <div class="card">
+                <div class="card-header">{{ __('Comunicados') }}</div>
 
+                <div class="card-body table-responsive" style="height: 300px;">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            @forelse ($comunicados as $comunicado)
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                    <td>
+                                        <span class="badge bg-secondary mr-2">{{ $comunicado->data->format('d/m') }}</span>
+
+
+                                        {{ $comunicado->titulo }}
+                                    </td>
+                                </tr>
+                                <tr class="expandable-body d-none">
+                                    <td colspan="2">
+                                        <p style="display: none;">
+
+                                            @if ($comunicado->imagem->first())
+                                                <img class="card-img-top img-fluid rounded"
+                                                    src="{{ route('imagens.exibir', $comunicado->imagem->first()->nome) }}"
+                                                    alt="Card image cap">
+                                            @endif
+
+                                            {{ $comunicado->descricao }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td>Nenhum comunicado cadastrado!</td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
-
-
-    </div>
-
-    <div class="row">
         <div class="col-md-8">
 
             <div class="card">
@@ -91,45 +124,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">{{ __('Comunicados') }}</div>
-
-                <div class="card-body table-responsive" style="height: 300px;">
-                    <table class="table table-bordered table-hover">
-                        <tbody>
-                            <tr data-widget="expandable-table" aria-expanded="false">
-                                <td>
-                                    <span class="badge bg-secondary mr-2">00/00</span>
-                                    Comunicado 1
-                                </td>
-                            </tr>
-                            <tr class="expandable-body d-none">
-                                <td colspan="2">
-                                    <p style="display: none;">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industrys standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book.
-                                        It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                                        with
-                                        the release of Letraset sheets containing Lorem Ipsum passages, and more
-                                        recently
-                                        with desktop publishing software like Aldus PageMaker including versions of
-                                        Lorem
-                                        Ipsum.
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
     </div>
+
+
 
 @endsection
 
