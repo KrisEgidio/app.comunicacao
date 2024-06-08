@@ -47,4 +47,3 @@ Route::resources([
  //Imagens
  Route::get('/imagens/{nomeArquivo}', [ImagemController::class, 'exibir'])->name('imagens.exibir');
 
- 
