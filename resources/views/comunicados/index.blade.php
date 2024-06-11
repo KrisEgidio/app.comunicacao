@@ -25,12 +25,6 @@
                         'icone' => 'fa fa-edit',
                         'cor' => 'primary',
                     ],
-                    'visualizar' => [
-                        'url' => route('comunicados.show', $comunicado->id),
-                        'label' => 'Visualizar',
-                        'icone' => 'fa fa-eye',
-                        'cor' => 'info',
-                    ],
                     'excluir' => [
                         'url' => route('comunicados.destroy', $comunicado->id),
                         'label' => 'Excluir',

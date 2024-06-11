@@ -382,7 +382,7 @@
                             {
                                 title: '{{ $evento->titulo }}',
                                 start: '{{ $evento->data }}',
-                                color: '{{ $evento->presencaConfirmada() ? 'success' : 'danger' }}',
+                                color: '{{ $evento->presencaConfirmada() ? '#28a745' : '#ff0000' }}',
                                 id: '{{ $evento->id }}',
                                 display: 'list-item',
                             },

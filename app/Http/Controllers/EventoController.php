@@ -108,7 +108,7 @@ class EventoController extends Controller
 
         return view('eventos.show', [
             'evento' => $evento,
-            'confirmacoes' => $evento->confirmacoes()->where('status', 'aceito')->get(),
+            'confirmacoes' => $evento->confirmacoes()->get(),
         ]);
     }
 
