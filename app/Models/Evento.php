@@ -52,8 +52,63 @@ class Evento extends Model
         return $this->morphMany(Imagem::class, 'model');
     }
 
-    public function confirmacoes() : MorphMany
+    public function confirmacoes() : HasMany
     {
-        return $this->morphMany(Confirmacao::class, 'model');
+        return $this->hasMany(Confirmacao::class);
+    }
+
+    public function presencaConfirmada() : bool
+    {
+        return $this->confirmacoes->where('usuario_id', auth()->user()->id)->count() > 0;
+    }
+
+    public function getDia() : string
+    {
+        return $this->data->format('d');
+    }
+
+    public function getMes() : string
+    {
+        $meses = [
+            '01' => 'Janeiro',
+            '02' => 'Fevereiro',
+            '03' => 'Março',
+            '04' => 'Abril',
+            '05' => 'Maio',
+            '06' => 'Junho',
+            '07' => 'Julho',
+            '08' => 'Agosto',
+            '09' => 'Setembro',
+            '10' => 'Outubro',
+            '11' => 'Novembro',
+            '12' => 'Dezembro',
+        ];
+
+        return $meses[$this->data->format('m')];
+    }
+
+    public function getDiaDaSemana() : string
+    {
+        $dias = [
+            '0' => 'Domingo',
+            '1' => 'Segunda-feira',
+            '2' => 'Terça-feira',
+            '3' => 'Quarta-feira',
+            '4' => 'Quinta-feira',
+            '5' => 'Sexta-feira',
+            '6' => 'Sábado',
+        ];
+
+        return $dias[$this->data->format('w')];
+    }
+
+    public function getEndereco()
+    {
+        return "{$this->endereco}, {$this->bairro}, {$this->cidade->nome} - {$this->cidade->estado->sigla}, CEP: {$this->cep}";
+    }
+
+    public function getHora() : string
+    {
+        return substr($this->hora, 0, 5); // Extrai os primeiros 5 caracteres (hh:mm)
     }
 }

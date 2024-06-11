@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     CidadeController,
     ComunicadoController,
+    ConfirmacaoController,
     EventoController,
     UsuarioController,
     GrupoController,
@@ -40,6 +41,8 @@ Route::resources([
     'comunicados' => ComunicadoController::class,
 ]);
 
+Route::post('/confirmar-presenca', [ConfirmacaoController::class, 'confirmarPresenca'])->name('presenca.confirmar');
+Route::post('/cancelar-presenca', [ConfirmacaoController::class, 'cancelarPresenca'])->name('presenca.cancelar');
 
  // ajax
  Route::get('/cidades/{estado_id}', [CidadeController::class, 'getCidades'])->name('cidades.get');

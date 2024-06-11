@@ -26,9 +26,27 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $usuario = auth()->user();
+        $hoje = date('Y-m-d');
+
+        $queryEventos = Evento::where('data', '>=', $hoje)->orderBy('data', 'asc');
+        $queryComunicados = Comunicado::with('grupo')->where('data', '>=', $hoje)->orderBy('data', 'asc');
+
+        if ($usuario->ehModerador()) {
+            $grupos_id = $usuario->gruposModerador()->pluck('grupo_id');
+            $queryEventos->whereIn('grupo_id', $grupos_id);
+            $queryComunicados->whereIn('grupo_id', $grupos_id);
+        } else if (!$usuario->ehAdmin()) {
+            $queryEventos->where('grupo_id', $usuario->grupos()->pluck('grupo_id'));
+            $queryComunicados->where('grupo_id', $usuario->grupos()->pluck('grupo_id'));
+        }
+
+        $eventos = $queryEventos->get();
+        $comunicados = $queryComunicados->get();
+
         return view('dashboards.inicio', [
-            'eventos' => Evento::where('data', '>=', date('Y-m-d'))->orderBy('data', 'asc')->get(),
-            'comunicados' => Comunicado::with('grupo')->where('data', '>=', date('Y-m-d'))->orderBy('data', 'asc')->get(),
+            'eventos' => $eventos,
+            'comunicados' => $comunicados,
         ]);
     }
 
@@ -93,5 +111,4 @@ class HomeController extends Controller
             'eventosSessoes' => [],
         ]);
     }
-
 }
