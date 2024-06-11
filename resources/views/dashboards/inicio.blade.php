@@ -126,7 +126,9 @@
                                             alt="user image">
                                         <span class="username">
                                             <a href="" data-toggle="modal"
-                                                data-target="#modal-comunicado-{{ $comunicado->id }}">NOME DO GRUPO</a>
+                                                data-target="#modal-comunicado-{{ $comunicado->id }}">
+                                                {{ $comunicado->titulo }}
+                                            </a>
                                         </span>
                                         <span class="description">Publicado em -
                                             {{ $comunicado->created_at->format('d/m/Y H:i') }}</span>
@@ -152,7 +154,7 @@
                                                 <div class=" p-2 mb-3">
                                                     @if ($comunicado->imagem->first())
                                                         <img src="{{ route('imagens.exibir', $comunicado->imagem->first()->nome) }}"
-                                                            class="img-fluid rounded" alt="Imagem promocional" />
+                                                            class="img-fluid rounded mx-auto d-block" alt="Imagem promocional" style="max-height: 400px" />
                                                     @endif
                                                     <div class="row">
                                                         <div class="col-12">
@@ -187,8 +189,10 @@
                                                                         </tr>
                                                                         <tr>
                                                                             <th><i class="fas fa-user"
-                                                                                    aria-hidden="true"></i> De:</th>
-                                                                            <td>NOME GRUPO</td>
+                                                                                    aria-hidden="true"></i> Grupo:</th>
+                                                                            <td>
+                                                                                {{ $comunicado->grupo->nome }}
+                                                                            </td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

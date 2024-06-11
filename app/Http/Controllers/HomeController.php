@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         return view('dashboards.inicio', [
             'eventos' => Evento::where('data', '>=', date('Y-m-d'))->orderBy('data', 'asc')->get(),
-            'comunicados' => Comunicado::where('data', '>=', date('Y-m-d'))->orderBy('data', 'asc')->get(),
+            'comunicados' => Comunicado::with('grupo')->where('data', '>=', date('Y-m-d'))->orderBy('data', 'asc')->get(),
         ]);
     }
 
@@ -91,15 +91,6 @@ class HomeController extends Controller
 
         return view('dashboards.calendario', [
             'eventosSessoes' => [],
-        ]);
-    }
-
-    public function comunicado()
-    {
-        $comunicados = Comunicado::where('status', '!=', 'cancelada')->orderBy('data', 'desc')->paginate(10);
-
-        return view('dashboards.comunicado', [
-            'comunicados' => [],
         ]);
     }
 
